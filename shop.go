@@ -20,7 +20,7 @@ type Shop struct {
 
 func NewShop(url string, key string, token string, certPath string, certPass string) (shop *Shop, err error) {
 	shop = &Shop{
-		url:   url,
+		url:   url + "/rs/shop",
 		key:   key,
 		token: token,
 	}
