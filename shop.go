@@ -1,10 +1,10 @@
 package ckassa
 
 import (
+	"ckassa/models"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -66,7 +66,7 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 
 	response, err := NewResponse(contents)
 	if err != nil {
-		return nil, apiError
+		return nil, ApiError
 	}
 
 	if res.StatusCode != http.StatusOK {
@@ -74,22 +74,24 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 	}
 
 	if string(contents) == "" {
-		return nil, apiError
+		return nil, ApiError
 	}
 
 	return response, nil
 }
 
-func (s Shop) CreateMerchant(req MerchantRegRequest) (*Merchant, error) {
+func (s Shop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, error) {
 	path := s.url + RegMerchantPath
 	resp, err := s.SendRequest(path, req)
-	fmt.Println(resp)
-	//merch := NewMerchant(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	merchant, err := models.NewMerchant([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
 
-	return nil, nil
+	return &merchant, nil
 }
 
 func (s Shop) getSignString(data map[string]string) string {

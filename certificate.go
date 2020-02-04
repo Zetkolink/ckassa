@@ -27,7 +27,7 @@ func NewCert(path string, pass string) (*Certificate, error) {
 	}
 
 	if !fileExists(path) {
-		return cert, certificateNotFound
+		return cert, CertificateNotFound
 	}
 
 	caCert, err := ioutil.ReadFile(path)

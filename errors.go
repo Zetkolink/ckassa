@@ -3,15 +3,15 @@ package ckassa
 import "errors"
 
 var (
-	// certificateNotFound файл сертификата не найден.
-	certificateNotFound = errors.New("certificate file not found")
+	// CertificateNotFound файл сертификата не найден.
+	CertificateNotFound = errors.New("certificate file not found")
 
-	// cardTypeNotAllowed данный тип карт не поддерживается.
-	cardTypeNotAllowed = errors.New("card type not allowed")
+	// CardTypeNotAllowed данный тип карт не поддерживается.
+	CardTypeNotAllowed = errors.New("card type not allowed")
 
-	// userStateNotAllowed данный статус пользователя не поддерживается.
-	userStateNotAllowed = errors.New("user state not allowed")
+	// UserStateNotAllowed данный статус пользователя не поддерживается.
+	UserStateNotAllowed = errors.New("user state not allowed")
 
-	// apiError api вернул неправильный ответ.
-	apiError = errors.New("api return bad body")
+	// ApiError api вернул неправильный ответ.
+	ApiError = errors.New("api return bad body")
 )
