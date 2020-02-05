@@ -13,7 +13,7 @@ func NewMerchantShop(sh models.Shop) *MerchantShop {
 
 // CreateMerchant регистрация мерчанта.
 func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, error) {
-	path := m.Url + RegMerchantPath
+	path := m.Url + MerchantRegPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Response, error) {
 
 // LoadMerchant получение данных зарегистрированного мерчанта.
 func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*models.Merchant, error) {
-	path := m.Url + StatusPath
+	path := m.Url + MerchantStatusPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err

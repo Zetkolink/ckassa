@@ -154,3 +154,48 @@ type UpdatePayMerchantRequest struct {
 	// ExtraPhone дополнительный телефон мерчанта (используется для дополнительной идентификации).
 	ExtraPhone string `json:"extraPhone"`
 }
+
+// UserRegRequest тело запроса на регистрацию пользователя.
+type UserRegRequest struct {
+	// Login номер телефона в формате 7**********.
+	Login string `json:"login"`
+
+	// Email почта.
+	Email string `json:"email"`
+
+	// Name имя.
+	Name string `json:"name"`
+
+	// Surname фамилия.
+	Surname string `json:"surname"`
+
+	// MiddleName отчество.
+	MiddleName string `json:"middleName"`
+}
+
+// CardRegRequest тело запроса на регистрацию карты.
+type CardRegRequest struct {
+	// ClientType устанавливает вид формы оплаты (та, что будет отправлена клиенту)
+	// * web - WEB форма (по умолчанию)
+	// * mobile - мобильная форма
+	// * iframe - фрейм
+	ClientType string `json:"clientType"`
+
+	// UserToken идентификатор пользователя.
+	UserToken string `json:"userToken"`
+}
+
+// GetCardListRequest тело запроса на получения списка карт.
+type GetCardListRequest struct {
+	// UserToken идентификатор пользователя.
+	UserToken string `json:"userToken"`
+}
+
+// CardDeactivateRequest тело запроса на деактивацию зарегитстрированной карты.
+type CardDeactivateRequest struct {
+	// UserToken идентификатор пользователя.
+	UserToken string `json:"userToken"`
+
+	// CardToken идентификатор карты.
+	CardToken string `json:"cardToken"`
+}
