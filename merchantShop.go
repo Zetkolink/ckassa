@@ -53,3 +53,69 @@ func (m MerchantShop) CreatePayment(req PaymentRequest) (*models.Payment, error)
 	}
 	return &payment, nil
 }
+
+// GetBalance получение баланса мерчанта.
+func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Response, error) {
+	path := m.Url + BalancePath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// LoadMerchant получение данных зарегистрированного мерчанта.
+func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*models.Merchant, error) {
+	path := m.Url + StatusPath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	merchant, err := models.NewMerchant([]byte(resp.Body))
+	if err != nil {
+		return nil, err
+	}
+
+	return &merchant, nil
+}
+
+// ReservePayment бронирование средств на балансе пользователя.
+func (m MerchantShop) ReservePayment(req PaymentRequest) (*models.Payment, error) {
+	path := m.Url + ReservePaymentPath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	payment, err := models.NewPayment([]byte(resp.Body))
+	if err != nil {
+		return nil, err
+	}
+	return &payment, nil
+}
+
+func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*models.Payment, error) {
+	path := m.Url + ConfirmReservePaymentPath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	payment, err := models.NewPayment([]byte(resp.Body))
+	if err != nil {
+		return nil, err
+	}
+	return &payment, nil
+}
+
+// UpdatePayMerchant обновление получателя ( мерчанта ) платежа.
+func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*models.Payment, error) {
+	path := m.Url + UpdatePayMerchantPath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	payment, err := models.NewPayment([]byte(resp.Body))
+	if err != nil {
+		return nil, err
+	}
+	return &payment, nil
+}

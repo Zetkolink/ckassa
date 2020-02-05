@@ -42,6 +42,7 @@ type Doc struct {
 // Docs список документов мерчанта.
 type Docs []Doc
 
+// MobilePaymentRequest тело запроса на создание платежа в пользу мерчанта с баланса мобильного телефона.
 type MobilePaymentRequest struct {
 	// ServiceCode код провайдера.
 	ServiceCode string `json:"serviceCode"`
@@ -76,6 +77,7 @@ type MobilePaymentRequest struct {
 	FiscalType string `json:"fiscalType"`
 }
 
+// PaymentRequest тело запроса на создание платежа в пользу мерчанта.
 type PaymentRequest struct {
 	// ServiceCode код провайдера.
 	ServiceCode string `json:"serviceCode"`
@@ -124,4 +126,31 @@ type PaymentRequest struct {
 
 	// FiscalType нужно ли отправлять фискальный чек.
 	FiscalType string `json:"fiscalType"`
+}
+
+// GetBalanceRequest тело запроса на получение баланса мерчанта.
+type GetBalanceRequest struct {
+	// MerchantToken идентификатор мерчанта.
+	MerchantToken string `json:"merchantToken"`
+}
+
+// LoadMerchantRequest тело запроса на получение данных мерчанта.
+type LoadMerchantRequest struct {
+	// Login номер телефона в формате 7**********.
+	Login string `json:"login"`
+}
+
+// UpdatePayMerchantRequest тело запроса на обновление получателя ( мерчанта ) платежа.
+type UpdatePayMerchantRequest struct {
+	// RegPayNum номер платежа.
+	RegPayNum string `json:"regPayNum"`
+
+	// MerchantToken идентификатор мерчанта.
+	MerchantToken string `json:"merchantToken"`
+
+	// CallName позывной мерчанта, используется для дополнительной идентификации.
+	CallName string `json:"callName"`
+
+	// ExtraPhone дополнительный телефон мерчанта (используется для дополнительной идентификации).
+	ExtraPhone string `json:"extra_phone"`
 }

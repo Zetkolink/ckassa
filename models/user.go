@@ -7,7 +7,7 @@ import (
 
 // User пользователь.
 type User struct {
-	// Login номер телефона.
+	// Login номер телефона в формате 7**********.
 	Login string `json:"login"`
 
 	// Email почта.
