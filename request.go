@@ -115,7 +115,7 @@ type PaymentRequest struct {
 	CallName string `json:"callName"`
 
 	// ExtraPhone дополнительный телефон мерчанта (используется для дополнительной идентификации).
-	ExtraPhone string `json:"extra_phone"`
+	ExtraPhone string `json:"extraPhone"`
 
 	// HoldTtl время заморозки средств (в секундах). Минимум 10 минут, максимум 4 дня, по умолчанию 30 минут,
 	// если услуга не будет подтверждена, произойдет автоматический возврат средств на карту клиента.
@@ -152,5 +152,5 @@ type UpdatePayMerchantRequest struct {
 	CallName string `json:"callName"`
 
 	// ExtraPhone дополнительный телефон мерчанта (используется для дополнительной идентификации).
-	ExtraPhone string `json:"extra_phone"`
+	ExtraPhone string `json:"extraPhone"`
 }

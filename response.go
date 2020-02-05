@@ -11,7 +11,7 @@ type Response struct {
 	Message string `json:"message"`
 
 	// UserMessage сообщение для пользователя.
-	UserMessage string `json:"user_message"`
+	UserMessage string `json:"userMessage"`
 
 	// Body тело ответа.
 	Body string `json:"body"`

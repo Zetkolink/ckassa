@@ -20,13 +20,13 @@ type User struct {
 	Surname string `json:"surname"`
 
 	// MiddleName отчество.
-	MiddleName string `json:"middle_name"`
+	MiddleName string `json:"middleName"`
 
 	// State статус.
 	State string `json:"state"`
 
 	// UserToken идентификатор пользователя.
-	UserToken string `json:"user_token"`
+	UserToken string `json:"userToken"`
 }
 
 func NewUser(userJson []byte) (User, error) {
