@@ -5,13 +5,13 @@ import "encoding/json"
 // Merchant мерчант.
 type Merchant struct {
 	// Phone номер телефона.
-	Phone         string `json:"phone"`
+	Phone string `json:"phone"`
 
 	// MerchantToken токен мерчанта.
-	MerchantToken string `json:"merchant_token"`
+	MerchantToken string `json:"merchantToken"`
 
 	// State статус мерчанта.
-	State         string `json:"state"`
+	State string `json:"state"`
 }
 
 func NewMerchant(merchantJson []byte) (Merchant, error) {

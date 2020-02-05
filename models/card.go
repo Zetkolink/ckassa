@@ -8,16 +8,16 @@ import (
 // Card карта.
 type Card struct {
 	// cardMask маскированный номер.
-	CardMask string `json:"card_mask"`
+	CardMask string `json:"cardMask"`
 
 	// exp время действия.
 	Exp string `json:"exp"`
 
 	// cardToken токен.
-	CardToken string `json:"card_token"`
+	CardToken string `json:"cardToken"`
 
 	// cardType тип карты.
-	CardType string `json:"card_type"`
+	CardType string `json:"cardType"`
 }
 
 func NewCard(cardJson []byte) (Card, error) {

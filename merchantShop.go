@@ -26,8 +26,23 @@ func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, 
 	return &merchant, nil
 }
 
+// CreateMobilePayment создание платежа в пользу мерчанта, оплата с баланса сотового телефона.
 func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*models.Payment, error) {
 	path := m.Url + MobilePaymentPath
+	resp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, err
+	}
+	payment, err := models.NewPayment([]byte(resp.Body))
+	if err != nil {
+		return nil, err
+	}
+	return &payment, nil
+}
+
+// CreatePayment создание платежа в пользу мерчанта.
+func (m MerchantShop) CreatePayment(req PaymentRequest) (*models.Payment, error) {
+	path := m.Url + PaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err

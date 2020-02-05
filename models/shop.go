@@ -12,10 +12,16 @@ import (
 )
 
 type Shop struct {
-	Url   string
-	Key   string
-	Token string
-	Cert  *ckassa.Certificate
+	// Url к API Shop.
+	Url string `json:"url"`
+
+	// Key уникальный ключ, используется для подписи сообщений.
+	Key string `json:"key"`
+
+	// Token идентификатор организации.
+	Token string `json:"token"`
+
+	Cert *ckassa.Certificate
 }
 
 func NewShop(url string, key string, token string, certPath string, certPass string) (shop *Shop, err error) {
@@ -33,6 +39,7 @@ func NewShop(url string, key string, token string, certPath string, certPass str
 	return
 }
 
+// SendRequest отправка запроса к Shop API.
 func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, error) {
 	dataMap := ckassa.GetStringMap(data)
 	dataMap["sign"] = s.getSign(dataMap)
@@ -80,11 +87,13 @@ func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, erro
 	return response, nil
 }
 
+// getSignString получение строки подписи из набора данных.
 func (s Shop) getSignString(data map[string]string) string {
 	values := ckassa.GetValuesMap(data)
 	return strings.Join(values, "&")
 }
 
+// getSign создание подписи.
 func (s Shop) getSign(data map[string]string) string {
 	return strings.ToUpper(ckassa.GetMD5Hash(strings.ToUpper(ckassa.GetMD5Hash(s.getSignString(data) + "&" + s.Token + "&" + s.Key))))
 }

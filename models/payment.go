@@ -5,22 +5,22 @@ import "encoding/json"
 // Payment платеж.
 type Payment struct {
 	// RegPayNum номер платежа.
-	RegPayNum string `json:"reg_pay_num"`
+	RegPayNum string `json:"regPayNum"`
 
 	// MethodType метод перехода по url для просмотра чека (GET/POST).
-	MethodType string `json:"method_type"`
+	MethodType string `json:"methodType"`
 
 	// UserToken идентификатор пользователя
-	UserToken string `json:"user_token"`
+	UserToken string `json:"userToken"`
 
 	// UserPhone номер телефона пользователя.
-	UserPhone string `json:"user_phone"`
+	UserPhone string `json:"userPhone"`
 
 	// PayUrl url на страницу с чеком.
-	PayUrl string `json:"pay_url"`
+	PayUrl string `json:"payUrl"`
 
 	// MerchantToken идентификатор мерчанта.
-	MerchantToken string `json:"merchant_token"`
+	MerchantToken string `json:"merchantToken"`
 }
 
 func NewPayment(paymentJson []byte) (Payment, error) {

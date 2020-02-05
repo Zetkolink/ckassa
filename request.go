@@ -44,7 +44,7 @@ type Docs []Doc
 
 type MobilePaymentRequest struct {
 	// ServiceCode код провайдера.
-	ServiceCode string `json:"service_code"`
+	ServiceCode string `json:"serviceCode"`
 
 	// Amount сумма платежа в копейках, которая идет на счет пользователю.
 	Amount string `json:"amount"`
@@ -53,25 +53,75 @@ type MobilePaymentRequest struct {
 	Comission string `json:"comission"`
 
 	// OrderId уникальный идентификатор заказа на стороне магазина.
-	OrderId string `json:"order_id"`
+	OrderId string `json:"orderId"`
 
 	// Description дополнительные сведения.
 	Description string `json:"description"`
 
 	// UserToken идентификатор пользователя, если клиент был ранее зарегестрирован
 	// то оплата будет произведена с телефона указанного при регистрации (login).
-	UserToken string `json:"user_token"`
+	UserToken string `json:"userToken"`
 
 	// MerchantToken идентификатор мерчанта.
-	MerchantToken string `json:"merchant_token"`
+	MerchantToken string `json:"merchantToken"`
 
 	// UserPhone номер телефона для СМС платежа с которого будет произведена оплата,
 	// должен отправляться только в случае если пользователь не зарегестрирован.
-	UserPhone string `json:"user_phone"`
+	UserPhone string `json:"userPhone"`
 
 	// UserEmail e-mail для отправки фискального чека.
-	UserEmail string `json:"user_email"`
+	UserEmail string `json:"userEmail"`
 
 	// FiscalType нужно ли отправлять фискальный чек.
-	FiscalType string `json:"fiscal_type"`
+	FiscalType string `json:"fiscalType"`
+}
+
+type PaymentRequest struct {
+	// ServiceCode код провайдера.
+	ServiceCode string `json:"serviceCode"`
+
+	// Amount сумма платежа в копейках, которая идет на счет пользователю.
+	Amount string `json:"amount"`
+
+	// Comission комиссия платежа в копейках, при отсутствии комиссии передается 0.
+	Comission string `json:"comission"`
+
+	// OrderId уникальный идентификатор заказа на стороне магазина.
+	OrderId string `json:"orderId"`
+
+	// Description дополнительные сведения.
+	Description string `json:"description"`
+
+	// UserToken идентификатор пользователя, если клиент был ранее зарегестрирован
+	// то оплата будет произведена с телефона указанного при регистрации (login).
+	UserToken string `json:"userToken"`
+
+	// CardToken идентификатор карты.
+	CardToken string `json:"cardToken"`
+
+	// GPayToken токен при оплате через Google Pay.
+	GPayToken string `json:"gPayToken"`
+
+	// EnableSMSConfirm Используется только для рекуррентных платежей
+	// Данный параметр определяет включать ли поддержку 3ds.
+	EnableSMSConfirm string `json:"enableSmsConfirm"`
+
+	// MerchantToken идентификатор мерчанта.
+	MerchantToken string `json:"merchantToken"`
+
+	// CallName позывной мерчанта, используется для дополнительной идентификации.
+	CallName string `json:"callName"`
+
+	// ExtraPhone дополнительный телефон мерчанта (используется для дополнительной идентификации).
+	ExtraPhone string `json:"extra_phone"`
+
+	// HoldTtl время заморозки средств (в секундах). Минимум 10 минут, максимум 4 дня, по умолчанию 30 минут,
+	// если услуга не будет подтверждена, произойдет автоматический возврат средств на карту клиента.
+	HoldTtl string `json:"holdTtl"`
+
+	// PayType тип оплаты.
+	PayType string `json:"payType"`
+
+	// FiscalType нужно ли отправлять фискальный чек.
+	FiscalType string `json:"fiscalType"`
 }
