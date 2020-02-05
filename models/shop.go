@@ -1,7 +1,7 @@
-package ckassa
+package models
 
 import (
-	"ckassa/models"
+	"ckassa"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
@@ -12,20 +12,20 @@ import (
 )
 
 type Shop struct {
-	url   string
-	key   string
-	token string
-	cert  *Certificate
+	Url   string
+	Key   string
+	Token string
+	Cert  *ckassa.Certificate
 }
 
 func NewShop(url string, key string, token string, certPath string, certPass string) (shop *Shop, err error) {
 	shop = &Shop{
-		url:   url + "/rs/shop",
-		key:   key,
-		token: token,
+		Url:   url + "/rs/shop",
+		Key:   key,
+		Token: token,
 	}
 
-	shop.cert, err = NewCert(certPath, certPass)
+	shop.Cert, err = ckassa.NewCert(certPath, certPass)
 	if err != nil {
 		return
 	}
@@ -33,10 +33,10 @@ func NewShop(url string, key string, token string, certPath string, certPass str
 	return
 }
 
-func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
-	dataMap := getStringMap(data)
+func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, error) {
+	dataMap := ckassa.GetStringMap(data)
 	dataMap["sign"] = s.getSign(dataMap)
-	dataMap["shopToken"] = s.token
+	dataMap["shopToken"] = s.Token
 
 	dataMapJson, _ := json.Marshal(dataMap)
 
@@ -45,7 +45,7 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				RootCAs: s.cert.CertPool,
+				RootCAs: s.Cert.CertPool,
 			},
 		},
 	}
@@ -64,9 +64,9 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 		return nil, err
 	}
 
-	response, err := NewResponse(contents)
+	response, err := ckassa.NewResponse(contents)
 	if err != nil {
-		return nil, ApiError
+		return nil, ckassa.ApiError
 	}
 
 	if res.StatusCode != http.StatusOK {
@@ -74,31 +74,17 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 	}
 
 	if string(contents) == "" {
-		return nil, ApiError
+		return nil, ckassa.ApiError
 	}
 
 	return response, nil
 }
 
-func (s Shop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, error) {
-	path := s.url + RegMerchantPath
-	resp, err := s.SendRequest(path, req)
-	if err != nil {
-		return nil, err
-	}
-	merchant, err := models.NewMerchant([]byte(resp.Body))
-	if err != nil {
-		return nil, err
-	}
-
-	return &merchant, nil
-}
-
 func (s Shop) getSignString(data map[string]string) string {
-	values := getValuesMap(data)
+	values := ckassa.GetValuesMap(data)
 	return strings.Join(values, "&")
 }
 
 func (s Shop) getSign(data map[string]string) string {
-	return strings.ToUpper(getMD5Hash(strings.ToUpper(getMD5Hash(s.getSignString(data) + "&" + s.token + "&" + s.key))))
+	return strings.ToUpper(ckassa.GetMD5Hash(strings.ToUpper(ckassa.GetMD5Hash(s.getSignString(data) + "&" + s.Token + "&" + s.Key))))
 }

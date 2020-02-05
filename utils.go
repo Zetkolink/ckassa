@@ -32,12 +32,12 @@ func decodeX509(pubPem []byte) (*x509.Certificate, error) {
 	return pub, nil
 }
 
-func getMD5Hash(text string) string {
+func GetMD5Hash(text string) string {
 	hash := md5.Sum([]byte(text))
 	return hex.EncodeToString(hash[:])
 }
 
-func getStringMap(data interface{}) map[string]string {
+func GetStringMap(data interface{}) map[string]string {
 	sVal := reflect.ValueOf(data)
 	sType := reflect.TypeOf(data)
 	length := sVal.NumField()
@@ -71,7 +71,7 @@ func getKeysMap(mp map[string]string) []string {
 	return keys
 }
 
-func getValuesMap(mp map[string]string) []string {
+func GetValuesMap(mp map[string]string) []string {
 	values := make([]string, len(mp))
 
 	for _, v := range mp {
