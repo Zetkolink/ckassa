@@ -1,7 +1,6 @@
 package models
 
 import (
-	"ckassa"
 	"encoding/json"
 )
 
@@ -36,22 +35,5 @@ func NewUser(userJson []byte) (User, error) {
 	if err != nil {
 		return user, err
 	}
-
-	err = user.setState(user.State)
-	if err != nil {
-		return user, err
-	}
-
 	return user, nil
-}
-
-// setState изменение статуса пользователя.
-func (u User) setState(state string) error {
-	for _, v := range ckassa.UserStates {
-		if v == state {
-			u.State = state
-			return nil
-		}
-	}
-	return ckassa.UserStateNotAllowed
 }

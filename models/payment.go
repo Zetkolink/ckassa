@@ -30,4 +30,6 @@ func NewPayment(paymentJson []byte) (Payment, error) {
 	if err != nil {
 		return pay, err
 	}
+
+	return pay, err
 }

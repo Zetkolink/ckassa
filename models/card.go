@@ -1,7 +1,6 @@
 package models
 
 import (
-	"ckassa"
 	"encoding/json"
 )
 
@@ -27,19 +26,5 @@ func NewCard(cardJson []byte) (Card, error) {
 	if err != nil {
 		return card, err
 	}
-	err = card.setCardType(card.CardType)
-	if err != nil {
-		return card, err
-	}
 	return card, nil
-}
-
-func (c Card) setCardType(cardType string) error {
-	for _, v := range ckassa.CardTypes {
-		if v == cardType {
-			c.CardType = cardType
-			return nil
-		}
-	}
-	return ckassa.CardTypeNotAllowed
 }
