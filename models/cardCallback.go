@@ -4,11 +4,11 @@ import "encoding/json"
 
 // CardCallback уведомление о том, что карта зарегистрирована.
 type CardCallback struct {
+	// CardToken токен.
+	CardToken string `json:"cardToken" gorm:"primary_key"`
+
 	// UserToken идентификатор пользователя
 	UserToken string `json:"userToken"`
-
-	// CardToken токен.
-	CardToken string `json:"cardToken"`
 
 	// CardMask маскированный номер.
 	CardMask string `json:"cardMask"`

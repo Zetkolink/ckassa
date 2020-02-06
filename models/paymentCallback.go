@@ -5,7 +5,7 @@ import "encoding/json"
 // PaymentCallback уведомление о статусе платежа.
 type PaymentCallback struct {
 	// RegPayNum номер платежа.
-	RegPayNum string `json:"regPayNum"`
+	RegPayNum string `json:"regPayNum" gorm:"primary_key"`
 
 	// State статус платежа
 	State string `json:"state"`
