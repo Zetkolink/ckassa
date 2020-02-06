@@ -1,7 +1,6 @@
 package models
 
 import (
-	"ckassa"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
@@ -21,7 +20,7 @@ type Shop struct {
 	// Token идентификатор организации.
 	Token string `json:"token"`
 
-	Cert *ckassa.Certificate
+	Cert *Certificate
 }
 
 func NewShop(url string, key string, token string, certPath string, certPass string) (shop *Shop, err error) {
@@ -31,7 +30,7 @@ func NewShop(url string, key string, token string, certPath string, certPass str
 		Token: token,
 	}
 
-	shop.Cert, err = ckassa.NewCert(certPath, certPass)
+	shop.Cert, err = NewCert(certPath, certPass)
 	if err != nil {
 		return
 	}
@@ -40,8 +39,8 @@ func NewShop(url string, key string, token string, certPath string, certPass str
 }
 
 // SendRequest отправка запроса к Shop API.
-func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, error) {
-	dataMap := ckassa.GetStringMap(data)
+func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
+	dataMap := GetStringMap(data)
 	dataMap["sign"] = s.getSign(dataMap)
 	dataMap["shopToken"] = s.Token
 
@@ -71,9 +70,9 @@ func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, erro
 		return nil, err
 	}
 
-	response, err := ckassa.NewResponse(contents)
+	response, err := NewResponse(contents)
 	if err != nil {
-		return nil, ckassa.ApiError
+		return nil, ApiError
 	}
 
 	if res.StatusCode != http.StatusOK {
@@ -81,7 +80,7 @@ func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, erro
 	}
 
 	if string(contents) == "" {
-		return nil, ckassa.ApiError
+		return nil, ApiError
 	}
 
 	return response, nil
@@ -89,11 +88,11 @@ func (s Shop) SendRequest(path string, data interface{}) (*ckassa.Response, erro
 
 // getSignString получение строки подписи из набора данных.
 func (s Shop) getSignString(data map[string]string) string {
-	values := ckassa.GetValuesMap(data)
+	values := GetValuesMap(data)
 	return strings.Join(values, "&")
 }
 
 // getSign создание подписи.
 func (s Shop) getSign(data map[string]string) string {
-	return strings.ToUpper(ckassa.GetMD5Hash(strings.ToUpper(ckassa.GetMD5Hash(s.getSignString(data) + "&" + s.Token + "&" + s.Key))))
+	return strings.ToUpper(GetMD5Hash(strings.ToUpper(GetMD5Hash(s.getSignString(data) + "&" + s.Token + "&" + s.Key))))
 }

@@ -55,7 +55,7 @@ func (m MerchantShop) CreatePayment(req PaymentRequest) (*models.Payment, error)
 }
 
 // GetBalance получение баланса мерчанта.
-func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Response, error) {
+func (m MerchantShop) GetBalance(req GetBalanceRequest) (*models.Response, error) {
 	path := m.Url + BalancePath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {

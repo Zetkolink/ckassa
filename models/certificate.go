@@ -1,4 +1,4 @@
-package ckassa
+package models
 
 import (
 	"crypto/x509"

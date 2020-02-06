@@ -1,4 +1,4 @@
-package ckassa
+package models
 
 import "encoding/json"
 
