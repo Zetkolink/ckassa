@@ -22,10 +22,11 @@ type Certificate struct {
 }
 
 // NewCert загрузка сертификата.
-func NewCert(path string, pass string) (*Certificate, error) {
+func NewCert(path string, pass string, name string) (*Certificate, error) {
 	cert := &Certificate{
 		Path: path,
 		Pass: pass,
+		Name: name,
 	}
 
 	if !fileExists(path) {

@@ -23,14 +23,14 @@ type Shop struct {
 	Cert *Certificate
 }
 
-func NewShop(url string, key string, token string, certPath string, certPass string) (shop *Shop, err error) {
+func NewShop(url string, key string, token string, certName string, certPath string, certPass string) (shop *Shop, err error) {
 	shop = &Shop{
 		Url:   url + "/rs/shop",
 		Key:   key,
 		Token: token,
 	}
 
-	shop.Cert, err = NewCert(certPath, certPass)
+	shop.Cert, err = NewCert(certPath, certPass, certName)
 	if err != nil {
 		return
 	}
@@ -56,7 +56,12 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 		},
 	}
 
-	res, err := client.Post(path, "application/json", body)
+	req, _ := http.NewRequest("POST", path, body)
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("dn", s.Cert.Name)
+
+	res, err := client.Do(req)
 	if res != nil {
 		defer func() {
 			_ = res.Body.Close()
