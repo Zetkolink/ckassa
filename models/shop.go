@@ -51,7 +51,7 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				RootCAs: s.Cert.CertPool,
+				Certificates: []tls.Certificate{s.Cert.Cert},
 			},
 		},
 	}

@@ -1,7 +1,9 @@
 package models
 
 import (
+	"crypto/tls"
 	"crypto/x509"
+	"encoding/pem"
 	"io/ioutil"
 )
 
@@ -16,7 +18,7 @@ type Certificate struct {
 	// Name имя сертификата.
 	Name string `json:"name"`
 
-	CertPool *x509.CertPool
+	Cert tls.Certificate
 }
 
 // NewCert загрузка сертификата.
@@ -30,14 +32,29 @@ func NewCert(path string, pass string) (*Certificate, error) {
 		return cert, CertificateNotFound
 	}
 
-	caCert, err := ioutil.ReadFile(path)
+	bundle, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-	caCertPool := x509.NewCertPool()
-	caCertPool.AppendCertsFromPEM(caCert)
 
-	cert.CertPool = caCertPool
+	keyBlock, certsPEM := pem.Decode(bundle)
+
+	keyDER, err := x509.DecryptPEMBlock(keyBlock, []byte(pass))
+	if err != nil {
+		return nil, CertificateDecryptError
+	}
+
+	keyBlock.Bytes = keyDER
+	keyBlock.Headers = nil
+
+	keyPEM := pem.EncodeToMemory(keyBlock)
+
+	certificate, err := tls.X509KeyPair(certsPEM, keyPEM)
+	if err != nil {
+		return nil, CertificatePairError
+	}
+
+	cert.Cert = certificate
 
 	return cert, nil
 }
