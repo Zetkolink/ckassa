@@ -93,6 +93,7 @@ func (m MerchantShop) ReservePayment(req PaymentRequest) (*models.Payment, error
 	return &payment, nil
 }
 
+// ConfirmReservePayment подтверждение забронированного платежа.
 func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*models.Payment, error) {
 	path := m.Url + ConfirmReservePaymentPath
 	resp, err := m.SendRequest(path, req)

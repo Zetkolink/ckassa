@@ -41,6 +41,7 @@ func (m MainShop) LoadUser(req MerchantRegRequest) (*models.User, error) {
 	return &user, nil
 }
 
+// DeactivateCard деактивация карты.
 func (m MainShop) RegCard(req CardRegRequest) (*models.CardReg, error) {
 	path := m.Url + CardRegPath
 	resp, err := m.SendRequest(path, req)
@@ -55,6 +56,7 @@ func (m MainShop) RegCard(req CardRegRequest) (*models.CardReg, error) {
 	return &cardReg, nil
 }
 
+// GetCardList получение списка карт.
 func (m MainShop) GetCardList(req CardRegRequest) (*models.CardList, error) {
 	path := m.Url + GetCardListPath
 	resp, err := m.SendRequest(path, req)
@@ -69,6 +71,7 @@ func (m MainShop) GetCardList(req CardRegRequest) (*models.CardList, error) {
 	return &cardList, nil
 }
 
+// DeactivateCard деактивация карты.
 func (m MainShop) DeactivateCard(req CardDeactivateRequest) (*models.Result, error) {
 	path := m.Url + CardDeactivationPath
 	resp, err := m.SendRequest(path, req)
