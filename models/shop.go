@@ -20,14 +20,18 @@ type Shop struct {
 	// Token идентификатор организации.
 	Token string `json:"token"`
 
+	// ServCode код провайдера.
+	ServCode string `json:"servCode"`
+
 	Cert *Certificate
 }
 
-func NewShop(url string, key string, token string, certName string, certPath string, certPass string) (shop *Shop, err error) {
+func NewShop(url string, key string, token string, servCode string, certName string, certPath string, certPass string) (shop *Shop, err error) {
 	shop = &Shop{
-		Url:   url + "/rs/shop",
-		Key:   key,
-		Token: token,
+		Url:      url + "/rs/shop",
+		Key:      key,
+		Token:    token,
+		ServCode: servCode,
 	}
 
 	shop.Cert, err = NewCert(certPath, certPass, certName)
