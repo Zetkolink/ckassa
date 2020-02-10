@@ -4,10 +4,10 @@ import "ckassa/models"
 
 // MerchantShop структура для работы с Merchant Shop API.
 type MerchantShop struct {
-	models.Shop
+	*models.Shop
 }
 
-func NewMerchantShop(sh models.Shop) *MerchantShop {
+func NewMerchantShop(sh *models.Shop) *MerchantShop {
 	return &MerchantShop{sh}
 }
 
