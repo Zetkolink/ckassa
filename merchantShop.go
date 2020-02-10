@@ -1,24 +1,22 @@
 package ckassa
 
-import "ckassa/models"
-
 // MerchantShop структура для работы с Merchant Shop API.
 type MerchantShop struct {
-	*models.Shop
+	*Shop
 }
 
-func NewMerchantShop(sh *models.Shop) *MerchantShop {
+func NewMerchantShop(sh *Shop) *MerchantShop {
 	return &MerchantShop{sh}
 }
 
 // CreateMerchant регистрация мерчанта.
-func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, error) {
+func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*Merchant, error) {
 	path := m.Url + MerchantRegPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	merchant, err := models.NewMerchant([]byte(resp.Body))
+	merchant, err := NewMerchant([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -27,13 +25,13 @@ func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*models.Merchant, 
 }
 
 // CreateMobilePayment создание платежа в пользу мерчанта, оплата с баланса сотового телефона.
-func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*models.Payment, error) {
+func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*Payment, error) {
 	path := m.Url + MobilePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	payment, err := models.NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -41,13 +39,13 @@ func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*models.Pay
 }
 
 // CreatePayment создание платежа в пользу мерчанта.
-func (m MerchantShop) CreatePayment(req PaymentRequest) (*models.Payment, error) {
+func (m MerchantShop) CreatePayment(req PaymentRequest) (*Payment, error) {
 	path := m.Url + PaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	payment, err := models.NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +53,7 @@ func (m MerchantShop) CreatePayment(req PaymentRequest) (*models.Payment, error)
 }
 
 // GetBalance получение баланса мерчанта.
-func (m MerchantShop) GetBalance(req GetBalanceRequest) (*models.Response, error) {
+func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Response, error) {
 	path := m.Url + BalancePath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
@@ -65,13 +63,13 @@ func (m MerchantShop) GetBalance(req GetBalanceRequest) (*models.Response, error
 }
 
 // LoadMerchant получение данных зарегистрированного мерчанта.
-func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*models.Merchant, error) {
+func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*Merchant, error) {
 	path := m.Url + MerchantStatusPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	merchant, err := models.NewMerchant([]byte(resp.Body))
+	merchant, err := NewMerchant([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -80,13 +78,13 @@ func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*models.Merchant, e
 }
 
 // ReservePayment бронирование средств на балансе пользователя.
-func (m MerchantShop) ReservePayment(req PaymentRequest) (*models.Payment, error) {
+func (m MerchantShop) ReservePayment(req PaymentRequest) (*Payment, error) {
 	path := m.Url + ReservePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	payment, err := models.NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -94,13 +92,13 @@ func (m MerchantShop) ReservePayment(req PaymentRequest) (*models.Payment, error
 }
 
 // ConfirmReservePayment подтверждение забронированного платежа.
-func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*models.Payment, error) {
+func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*Payment, error) {
 	path := m.Url + ConfirmReservePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	payment, err := models.NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -108,13 +106,13 @@ func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*mode
 }
 
 // UpdatePayMerchant обновление получателя ( мерчанта ) платежа.
-func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*models.Payment, error) {
+func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment, error) {
 	path := m.Url + UpdatePayMerchantPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, err
 	}
-	payment, err := models.NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(resp.Body))
 	if err != nil {
 		return nil, err
 	}
