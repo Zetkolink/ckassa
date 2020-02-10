@@ -79,13 +79,17 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 		return nil, err
 	}
 
-	response, err := NewResponse(contents)
-	if err != nil {
-		return nil, ApiError
+	if res.StatusCode == http.StatusNotFound {
+		return nil, NotFound
 	}
 
 	if res.StatusCode != http.StatusOK {
-		return nil, errors.New("response with status code " + strconv.Itoa(res.StatusCode))
+		return nil, ApiError
+	}
+
+	response, err := NewResponse(contents)
+	if err != nil {
+		return nil, ApiError
 	}
 
 	if string(contents) == "" {

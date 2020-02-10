@@ -5,6 +5,9 @@ import "errors"
 // ApiError api вернул неправильный ответ.
 var ApiError = errors.New("api return bad body")
 
+// NotFound не найдено.
+var NotFound = errors.New("item not found")
+
 // CertificateNotFound файл сертификата не найден.
 var CertificateNotFound = errors.New("certificate file not found")
 
