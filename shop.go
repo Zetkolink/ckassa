@@ -3,10 +3,8 @@ package ckassa
 import (
 	"crypto/tls"
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 	"strings"
 )
 
