@@ -124,7 +124,7 @@ func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*Paym
 }
 
 // UpdatePayMerchant обновление получателя ( мерчанта ) платежа.
-func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment, *Response, error) {
+func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*PaymentReservedUpdate, *Response, error) {
 	path := m.Url + UpdatePayMerchantPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
@@ -133,7 +133,7 @@ func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment,
 	if resp.Body == nil {
 		return nil, resp, nil
 	}
-	payment, err := NewPayment([]byte(*resp.Body))
+	payment, err := NewPaymentReservedUpdate([]byte(*resp.Body))
 	if err != nil {
 		return nil, nil, err
 	}
