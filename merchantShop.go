@@ -10,46 +10,55 @@ func NewMerchantShop(sh *Shop) *MerchantShop {
 }
 
 // CreateMerchant регистрация мерчанта.
-func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*Merchant, error) {
+func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*Merchant, *Response, error) {
 	path := m.Url + MerchantRegPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	merchant, err := NewMerchant([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return &merchant, nil
+	return &merchant, resp, nil
 }
 
 // CreateMobilePayment создание платежа в пользу мерчанта, оплата с баланса сотового телефона.
-func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*Payment, error) {
+func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*Payment, *Response, error) {
 	path := m.Url + MobilePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return &payment, nil
+	return &payment, resp, nil
 }
 
 // CreatePayment создание платежа в пользу мерчанта.
-func (m MerchantShop) CreatePayment(req PaymentRequest) (*Payment, error) {
+func (m MerchantShop) CreatePayment(req PaymentRequest) (*Payment, *Response, error) {
 	path := m.Url + PaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return &payment, nil
+	return &payment, resp, nil
 }
 
 // GetBalance получение баланса мерчанта.
@@ -63,58 +72,70 @@ func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Response, error) {
 }
 
 // LoadMerchant получение данных зарегистрированного мерчанта.
-func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*Merchant, error) {
+func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*Merchant, *Response, error) {
 	path := m.Url + MerchantStatusPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	merchant, err := NewMerchant([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return &merchant, nil
+	return &merchant, resp, nil
 }
 
 // ReservePayment бронирование средств на балансе пользователя.
-func (m MerchantShop) ReservePayment(req PaymentRequest) (*Payment, error) {
+func (m MerchantShop) ReservePayment(req PaymentRequest) (*Payment, *Response, error) {
 	path := m.Url + ReservePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, resp, err
 	}
-	return &payment, nil
+	return &payment, resp, nil
 }
 
 // ConfirmReservePayment подтверждение забронированного платежа.
-func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*Payment, error) {
+func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*Payment, *Response, error) {
 	path := m.Url + ConfirmReservePaymentPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return &payment, nil
+	return &payment, resp, nil
 }
 
 // UpdatePayMerchant обновление получателя ( мерчанта ) платежа.
-func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment, error) {
+func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment, *Response, error) {
 	path := m.Url + UpdatePayMerchantPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
+	}
+	if resp.Body == nil {
+		return nil, resp, nil
 	}
 	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return &payment, nil
+	return &payment, resp, nil
 }
