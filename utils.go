@@ -39,12 +39,10 @@ func GetMD5Hash(text string) string {
 }
 
 func GetValuesMap(mp map[string]string) []string {
-	values := make([]string, len(mp))
-
+	values := make([]string, 0)
 	for _, v := range mp {
 		values = append(values, v)
 	}
-
 	return values
 }
 
