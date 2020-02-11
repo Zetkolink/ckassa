@@ -3,7 +3,7 @@ package ckassa
 import "encoding/json"
 
 // Payment платеж.
-type PaymentConfirm struct {
+type PaymentReservedUpdate struct {
 	// RegPayNum номер платежа.
 	RegPayNum string `json:"regPayNum"`
 
@@ -11,8 +11,8 @@ type PaymentConfirm struct {
 	MerchantToken string `json:"merchantToken"`
 }
 
-func NewPaymentConfirm(paymentJson []byte) (PaymentConfirm, error) {
-	pay := PaymentConfirm{}
+func NewPaymentReservedUpdate(paymentJson []byte) (PaymentReservedUpdate, error) {
+	pay := PaymentReservedUpdate{}
 
 	err := json.Unmarshal(paymentJson, &pay)
 	if err != nil {
