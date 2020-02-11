@@ -15,7 +15,7 @@ func GetStringMap(data interface{}) map[string]string {
 	values := make(map[string]string, 0)
 	for i := 0; i < length; i++ {
 		field := sVal.Field(i)
-		key := sType.Field(i).Name
+		key := sType.Field(i).Tag.Get("json")
 		value := ""
 		switch field.Kind() {
 		case reflect.String:
