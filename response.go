@@ -4,8 +4,11 @@ import "encoding/json"
 
 // Response струтура для работы с ответами ShopAPI.
 type Response struct {
+	// Sign подпись.
+	Sign string `json:"sign"`
+
 	// Code код ответа.
-	Code string `json:"code"`
+	Code int `json:"code"`
 
 	// Message сообщение в ответе.
 	Message string `json:"message"`
@@ -14,7 +17,7 @@ type Response struct {
 	UserMessage string `json:"userMessage"`
 
 	// Body тело ответа.
-	Body string `json:"body"`
+	Body *string `json:"body"`
 }
 
 func NewResponse(responseBytes []byte) (*Response, error) {

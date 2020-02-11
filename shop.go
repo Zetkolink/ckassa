@@ -79,7 +79,7 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 
 	response, err := NewResponse(contents)
 	if err != nil {
-		return nil, ApiError
+		return nil, err
 	}
 
 	if string(contents) == "" {

@@ -16,7 +16,7 @@ func (m MainShop) CreateUser(req UserRegRequest) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	user, err := NewUser([]byte(resp.Body))
+	user, err := NewUser([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (m MainShop) LoadUser(req MerchantRegRequest) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	user, err := NewUser([]byte(resp.Body))
+	user, err := NewUser([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (m MainShop) RegCard(req CardRegRequest) (*CardReg, error) {
 	if err != nil {
 		return nil, err
 	}
-	cardReg, err := NewCardReg([]byte(resp.Body))
+	cardReg, err := NewCardReg([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (m MainShop) GetCardList(req CardRegRequest) (*CardList, error) {
 	if err != nil {
 		return nil, err
 	}
-	cardList, err := NewCardList([]byte(resp.Body))
+	cardList, err := NewCardList([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (m MainShop) DeactivateCard(req CardDeactivateRequest) (*Result, error) {
 	if err != nil {
 		return nil, err
 	}
-	result, err := NewResult([]byte(resp.Body))
+	result, err := NewResult([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
