@@ -77,14 +77,6 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 		return nil, err
 	}
 
-	if res.StatusCode == http.StatusNotFound {
-		return nil, NotFound
-	}
-
-	if res.StatusCode != http.StatusOK {
-		return nil, ApiError
-	}
-
 	response, err := NewResponse(contents)
 	if err != nil {
 		return nil, ApiError
