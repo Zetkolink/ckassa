@@ -102,5 +102,5 @@ func (s Shop) getSignString(data map[string]string) string {
 
 // getSign создание подписи.
 func (s Shop) getSign(data map[string]string) string {
-	return strings.ToUpper(GetMD5Hash(strings.ToUpper(GetMD5Hash(s.getSignString(data) + "&" + s.Token + "&" + s.Key))))
+	return strings.ToUpper(GetMD5Hash(strings.ToUpper(GetMD5Hash(s.getSignString(data) + s.Token + "&" + s.Key))))
 }
