@@ -28,7 +28,7 @@ func (m MainShop) CreateUser(req UserRegRequest) (*User, *Response, error) {
 }
 
 // LoadUser получение данных зарегестрированного пользователя.
-func (m MainShop) LoadUser(req MerchantRegRequest) (*User, *Response, error) {
+func (m MainShop) LoadUser(req LoadUserRequest) (*User, *Response, error) {
 	path := m.Url + UserStatusPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {
