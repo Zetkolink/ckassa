@@ -16,7 +16,7 @@ func (m MerchantShop) CreateMerchant(req MerchantRegRequest) (*Merchant, error) 
 	if err != nil {
 		return nil, err
 	}
-	merchant, err := NewMerchant([]byte(resp.Body))
+	merchant, err := NewMerchant([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (m MerchantShop) CreateMobilePayment(req MobilePaymentRequest) (*Payment, e
 	if err != nil {
 		return nil, err
 	}
-	payment, err := NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (m MerchantShop) CreatePayment(req PaymentRequest) (*Payment, error) {
 	if err != nil {
 		return nil, err
 	}
-	payment, err := NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (m MerchantShop) LoadMerchant(req LoadMerchantRequest) (*Merchant, error) {
 	if err != nil {
 		return nil, err
 	}
-	merchant, err := NewMerchant([]byte(resp.Body))
+	merchant, err := NewMerchant([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (m MerchantShop) ReservePayment(req PaymentRequest) (*Payment, error) {
 	if err != nil {
 		return nil, err
 	}
-	payment, err := NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func (m MerchantShop) ConfirmReservePayment(req UpdatePayMerchantRequest) (*Paym
 	if err != nil {
 		return nil, err
 	}
-	payment, err := NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (m MerchantShop) UpdatePayMerchant(req UpdatePayMerchantRequest) (*Payment,
 	if err != nil {
 		return nil, err
 	}
-	payment, err := NewPayment([]byte(resp.Body))
+	payment, err := NewPayment([]byte(*resp.Body))
 	if err != nil {
 		return nil, err
 	}
