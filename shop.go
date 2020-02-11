@@ -91,8 +91,13 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 
 // getSignString получение строки подписи из набора данных.
 func (s Shop) getSignString(data map[string]string) string {
-	values := GetValuesMap(data)
-	return strings.Join(values, "&")
+	sign := ""
+	for _, v := range data {
+		if v != "" {
+			sign += v + "&"
+		}
+	}
+	return sign
 }
 
 // getSign создание подписи.
