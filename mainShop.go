@@ -10,7 +10,7 @@ func NewMainShop(sh *Shop) *MainShop {
 }
 
 // CreateMerchant регистрация мерчанта.
-func (m MainShop) CreateUser(req MerchantRegRequest) (*User, error) {
+func (m MainShop) CreateUser(req UserRegRequest) (*User, error) {
 	path := m.Url + UserRegPath
 	resp, err := m.SendRequest(path, req)
 	if err != nil {

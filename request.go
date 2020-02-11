@@ -173,6 +173,12 @@ type UserRegRequest struct {
 	MiddleName string `json:"middleName"`
 }
 
+// LoadUserRequest тело запроса на получение данных пользователя.
+type LoadUserRequest struct {
+	// Login номер телефона в формате 7**********.
+	Login string `json:"login"`
+}
+
 // CardRegRequest тело запроса на регистрацию карты.
 type CardRegRequest struct {
 	// ClientType устанавливает вид формы оплаты (та, что будет отправлена клиенту)
