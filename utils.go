@@ -33,8 +33,9 @@ func GetStringMap(data interface{}) map[string]string {
 }
 
 func GetMD5Hash(text string) string {
-	hash := md5.Sum([]byte(text))
-	return hex.EncodeToString(hash[:])
+	hs := md5.New()
+	hs.Write([]byte(text))
+	return hex.EncodeToString(hs.Sum(nil))
 }
 
 func GetValuesMap(mp map[string]string) []string {
