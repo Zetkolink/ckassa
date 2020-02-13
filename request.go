@@ -167,7 +167,7 @@ type UserRegRequest struct {
 	Name string `json:"name"`
 
 	// Surname фамилия.
-	Surname string `json:"surName"`
+	SurName string `json:"surName"`
 
 	// MiddleName отчество.
 	MiddleName string `json:"middleName"`
