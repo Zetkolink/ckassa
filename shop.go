@@ -41,7 +41,7 @@ func NewShop(url string, key string, token string, servCode string, certName str
 }
 
 // SendRequest отправка запроса к Shop API.
-func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
+func (s Shop) SendRequest(path string, data interface{}) ([]byte, *Response, error) {
 	dataMap := GetStringMap(data)
 	dataMap["sign"] = s.getSign(dataMap)
 	dataMap["shopToken"] = s.Token
@@ -70,23 +70,22 @@ func (s Shop) SendRequest(path string, data interface{}) (*Response, error) {
 		}()
 	}
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	contents, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
+	if res.StatusCode == http.StatusOK || res.StatusCode == http.StatusCreated {
+		return contents, nil, nil
+	}
 	response, err := NewResponse(contents)
 	if err != nil {
-		return nil, err
+		return contents, nil, err
 	}
 
-	if string(contents) == "" {
-		return nil, ApiError
-	}
-
-	return response, nil
+	return contents, response, nil
 }
 
 // getSignString получение строки подписи из набора данных.

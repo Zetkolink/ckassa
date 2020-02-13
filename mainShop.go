@@ -12,89 +12,89 @@ func NewMainShop(sh *Shop) *MainShop {
 // CreateMerchant регистрация мерчанта.
 func (m MainShop) CreateUser(req UserRegRequest) (*User, *Response, error) {
 	path := m.Url + UserRegPath
-	resp, err := m.SendRequest(path, req)
+	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, nil, err
 	}
-	if resp.Body == nil {
-		return nil, resp, nil
-	}
-	user, err := NewUser([]byte(*resp.Body))
-	if err != nil {
-		return nil, nil, err
+	if errResp != nil {
+		return nil, errResp, nil
 	}
 
-	return &user, resp, nil
+	user, err := NewUser(resp)
+	if err != nil {
+		return nil, nil, err
+	}
+	return &user, nil, nil
 }
 
 // LoadUser получение данных зарегестрированного пользователя.
 func (m MainShop) LoadUser(req LoadUserRequest) (*User, *Response, error) {
 	path := m.Url + UserStatusPath
-	resp, err := m.SendRequest(path, req)
+	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, nil, err
 	}
-	if resp.Body == nil {
-		return nil, resp, nil
+	if errResp != nil {
+		return nil, errResp, nil
 	}
-	user, err := NewUser([]byte(*resp.Body))
+	user, err := NewUser(resp)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &user, resp, nil
+	return &user, nil, nil
 }
 
 // DeactivateCard деактивация карты.
 func (m MainShop) RegCard(req CardRegRequest) (*CardReg, *Response, error) {
 	path := m.Url + CardRegPath
-	resp, err := m.SendRequest(path, req)
+	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, nil, err
 	}
-	if resp.Body == nil {
-		return nil, resp, nil
+	if errResp != nil {
+		return nil, errResp, nil
 	}
-	cardReg, err := NewCardReg([]byte(*resp.Body))
+	cardReg, err := NewCardReg(resp)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &cardReg, resp, nil
+	return &cardReg, nil, nil
 }
 
 // GetCardList получение списка карт.
 func (m MainShop) GetCardList(req CardRegRequest) (*CardList, *Response, error) {
 	path := m.Url + GetCardListPath
-	resp, err := m.SendRequest(path, req)
+	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, nil, err
 	}
-	if resp.Body == nil {
-		return nil, resp, nil
+	if errResp != nil {
+		return nil, errResp, nil
 	}
-	cardList, err := NewCardList([]byte(*resp.Body))
+	cardList, err := NewCardList(resp)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &cardList, resp, nil
+	return &cardList, nil, nil
 }
 
 // DeactivateCard деактивация карты.
 func (m MainShop) DeactivateCard(req CardDeactivateRequest) (*Result, *Response, error) {
 	path := m.Url + CardDeactivationPath
-	resp, err := m.SendRequest(path, req)
+	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
 		return nil, nil, err
 	}
-	if resp.Body == nil {
-		return nil, resp, nil
+	if errResp != nil {
+		return nil, errResp, nil
 	}
-	result, err := NewResult([]byte(*resp.Body))
+	result, err := NewResult(resp)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &result, resp, nil
+	return &result, nil, nil
 }
