@@ -43,7 +43,7 @@ func NewShop(url string, key string, token string, servCode string, certName str
 // SendRequest отправка запроса к Shop API.
 func (s Shop) SendRequest(path string, data interface{}) ([]byte, *Response, error) {
 	dataMap := GetStringMap(data)
-	dataMap["sign"] = s.getSign(dataMap)
+	dataMap["sign"] = s.getSign(data)
 	dataMap["shopToken"] = s.Token
 
 	dataMapJson, _ := json.Marshal(dataMap)
@@ -91,18 +91,7 @@ func (s Shop) SendRequest(path string, data interface{}) ([]byte, *Response, err
 	return contents, nil, NotFound
 }
 
-// getSignString получение строки подписи из набора данных.
-func (s Shop) getSignString(data map[string]string) string {
-	sign := ""
-	for _, v := range data {
-		if v != "" {
-			sign += v + "&"
-		}
-	}
-	return sign
-}
-
 // getSign создание подписи.
-func (s Shop) getSign(data map[string]string) string {
-	return strings.ToUpper(GetMD5Hash(strings.ToUpper(GetMD5Hash(s.getSignString(data) + s.Token + "&" + s.Key))))
+func (s Shop) getSign(data interface{}) string {
+	return strings.ToUpper(GetMD5Hash(strings.ToUpper(GetMD5Hash(getSign(data) + s.Token + "&" + s.Key))))
 }

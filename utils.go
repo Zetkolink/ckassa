@@ -32,6 +32,28 @@ func GetStringMap(data interface{}) map[string]string {
 	return values
 }
 
+func getSign(data interface{}) string {
+	sVal := reflect.ValueOf(data)
+	length := sVal.NumField()
+	sign := ""
+	for i := 0; i < length; i++ {
+		field := sVal.Field(i)
+		value := ""
+		switch field.Kind() {
+		case reflect.String:
+			value = field.String()
+		case reflect.Int:
+			value = strconv.Itoa(int(field.Int()))
+		}
+
+		if value != "" {
+			sign += value
+		}
+
+	}
+	return sign
+}
+
 func GetMD5Hash(text string) string {
 	hs := md5.New()
 	hs.Write([]byte(text))
