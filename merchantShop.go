@@ -2,10 +2,10 @@ package ckassa
 
 // MerchantShop структура для работы с Merchant Shop API.
 type MerchantShop struct {
-	*Shop
+	Shop
 }
 
-func NewMerchantShop(sh *Shop) *MerchantShop {
+func NewMerchantShop(sh Shop) *MerchantShop {
 	ms := &MerchantShop{sh}
 	ms.Url += "/rs/merchant"
 	return ms
