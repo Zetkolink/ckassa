@@ -47,7 +47,7 @@ func getSign(data interface{}) string {
 		}
 
 		if value != "" {
-			sign += value
+			sign += value + "&"
 		}
 
 	}
