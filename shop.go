@@ -80,12 +80,15 @@ func (s Shop) SendRequest(path string, data interface{}) ([]byte, *Response, err
 	if res.StatusCode == http.StatusOK || res.StatusCode == http.StatusCreated {
 		return contents, nil, nil
 	}
-	response, err := NewResponse(contents)
-	if err != nil {
-		return contents, nil, err
+	if string(contents) != "" {
+		response, err := NewResponse(contents)
+		if err != nil {
+			return contents, nil, err
+		}
+		return contents, response, nil
 	}
 
-	return contents, response, nil
+	return contents, nil, NotFound
 }
 
 // getSignString получение строки подписи из набора данных.
