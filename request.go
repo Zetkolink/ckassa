@@ -106,7 +106,7 @@ type PaymentRequest struct {
 
 	// EnableSMSConfirm Используется только для рекуррентных платежей
 	// Данный параметр определяет включать ли поддержку 3ds.
-	EnableSMSConfirm string `json:"enableSmsConfirm"`
+	EnableSMSConfirm string `json:"enableSMSConfirm"`
 
 	// MerchantToken идентификатор мерчанта.
 	MerchantToken string `json:"merchantToken"`
