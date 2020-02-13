@@ -6,7 +6,9 @@ type MainShop struct {
 }
 
 func NewMainShop(sh *Shop) *MainShop {
-	return &MainShop{sh}
+	ms := &MainShop{sh}
+	ms.Url += "/rs/shop"
+	return ms
 }
 
 // CreateMerchant регистрация мерчанта.
