@@ -126,6 +126,9 @@ type PaymentRequest struct {
 
 	// FiscalType нужно ли отправлять фискальный чек.
 	FiscalType string `json:"fiscalType"`
+
+	// UserEmail email пользователя для отправки чека.
+	UserEmail string `json:"userEmail"`
 }
 
 // GetBalanceRequest тело запроса на получение баланса мерчанта.
