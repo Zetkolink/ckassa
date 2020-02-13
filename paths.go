@@ -6,7 +6,7 @@ package ckassa
 const MerchantRegPath = "/registration/merchant"
 
 // MerchantStatusPath путь для получения статуса мерчанта.
-const MerchantStatusPath = "merchant/status"
+const MerchantStatusPath = "/merchant/status"
 
 // BalancePath путь для получения баланса мерчанта.
 const BalancePath = "/get/merchant/wallet/balance"
