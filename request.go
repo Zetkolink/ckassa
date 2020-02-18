@@ -164,6 +164,18 @@ type UpdatePayMerchantRequest struct {
 	ExtraPhone string `json:"extraPhone"`
 }
 
+// ConfirmPaymentRequest тело запроса на подтверждение оказания услуги.
+type ConfirmPaymentRequest struct {
+	// RegPayNum номер платежа.
+	RegPayNum string `json:"regPayNum"`
+
+	// OrderId уникальный идентификатор заказа на стороне магазина.
+	OrderId string `json:"orderId"`
+
+	// Amount сумма платежа в копейках, которая идет на счет пользователю.
+	Amount string `json:"amount"`
+}
+
 // UserRegRequest тело запроса на регистрацию пользователя.
 type UserRegRequest struct {
 	// Login номер телефона в формате 7**********.
