@@ -133,7 +133,7 @@ func (m MerchantShop) ReservePayment(req PaymentRequest) (*Payment, *Response, e
 }
 
 // ConfirmReservePayment подтверждение забронированного платежа.
-func (m MerchantShop) ConfirmReservePayment(req ConfirmPaymentRequest) (*PaymentReservedUpdate, *Response, error) {
+func (m MerchantShop) ConfirmReservePayment(req ConfirmPaymentRequest) (*PaymentConfirm, *Response, error) {
 	path := m.BaseUrl + ConfirmReservePaymentPath
 	resp, errResp, err := m.SendRequest(path, req)
 	if err != nil {
@@ -142,7 +142,7 @@ func (m MerchantShop) ConfirmReservePayment(req ConfirmPaymentRequest) (*Payment
 	if errResp != nil {
 		return nil, errResp, nil
 	}
-	payment, err := NewPaymentReservedUpdate(resp)
+	payment, err := NewPaymentConfirm(resp)
 	if err != nil {
 		return nil, nil, err
 	}
