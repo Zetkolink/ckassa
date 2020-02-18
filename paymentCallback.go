@@ -32,7 +32,7 @@ type PaymentCallback struct {
 	Message string `json:"message"`
 
 	// ProvisionServices флаг, была ли оказана услуга.
-	ProvisionServices string `json:"provisionServices"`
+	ProvisionServices bool `json:"provisionServices"`
 
 	// ProcDate время проведения платежа в формате yyyy-mm-dd hh:mm:ss.
 	ProcDate string `json:"procDate"`
