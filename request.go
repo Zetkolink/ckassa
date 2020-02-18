@@ -131,6 +131,12 @@ type PaymentRequest struct {
 	UserEmail string `json:"userEmail"`
 }
 
+// GetPaymentStateRequest тело запроса на получение статуса платежа.
+type GetPaymentStateRequest struct {
+	// RegPayNum номер платежа.
+	RegPayNum string `json:"regPayNum"`
+}
+
 // GetBalanceRequest тело запроса на получение баланса мерчанта.
 type GetBalanceRequest struct {
 	// MerchantToken идентификатор мерчанта.

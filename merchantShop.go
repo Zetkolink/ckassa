@@ -63,6 +63,23 @@ func (m MerchantShop) CreatePayment(req PaymentRequest) (*Payment, *Response, er
 	return &payment, nil, nil
 }
 
+// GetPaymentState получение статуса платежа.
+func (m MerchantShop) GetPaymentState(req GetPaymentStateRequest) (*PaymentCallback, *Response, error) {
+	path := m.BaseUrl + PaymentStatePath
+	resp, errResp, err := m.SendRequest(path, req)
+	if err != nil {
+		return nil, nil, err
+	}
+	if errResp != nil {
+		return nil, errResp, nil
+	}
+	payment, err := NewPaymentCallback(resp)
+	if err != nil {
+		return nil, nil, err
+	}
+	return &payment, nil, nil
+}
+
 // GetBalance получение баланса мерчанта.
 func (m MerchantShop) GetBalance(req GetBalanceRequest) (*Wallet, *Response, error) {
 	path := m.Url + BalancePath

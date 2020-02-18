@@ -12,6 +12,9 @@ type Shop struct {
 	// Url к API Shop.
 	Url string `json:"url"`
 
+	// BaseUrl
+	BaseUrl string `json:"baseUrl"`
+
 	// Key уникальный ключ, используется для подписи сообщений.
 	Key string `json:"key"`
 
@@ -27,6 +30,7 @@ type Shop struct {
 func NewShop(url string, key string, token string, servCode string, certName string, certPath string, certPass string) (shop Shop, err error) {
 	shop = Shop{
 		Url:      url,
+		BaseUrl:  url,
 		Key:      key,
 		Token:    token,
 		ServCode: servCode,

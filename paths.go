@@ -19,6 +19,9 @@ const MobilePaymentPath = "/do/payment/mobile"
 // PaymentPath путь для создания платежа в пользу мерчанта.
 const PaymentPath = "/do/payment"
 
+// PaymentStatePath путь для получения статуса платежа.
+const PaymentStatePath = "/check/payment/state"
+
 // HOLD PAYMENT ======================================
 
 // ReservePaymentPath путь для бронирования суммы на карте пользователя.
