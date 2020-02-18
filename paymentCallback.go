@@ -11,7 +11,7 @@ type PaymentCallback struct {
 	State string `json:"state"`
 
 	// TotalAmount сумма платежа в копейках.
-	TotalAmount string `json:"totalAmount"`
+	TotalAmount int `json:"totalAmount"`
 
 	// CreatedDate время создания платежа (Время должно быть в формате: yyyy-mm-dd hh:mm:ss).
 	CreatedDate string `json:"createdDate"`
