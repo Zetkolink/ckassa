@@ -182,16 +182,16 @@ type UserRegRequest struct {
 	Login string `json:"login"`
 
 	// Email почта.
-	Email string `json:"email"`
+	Email *string `json:"email"`
 
 	// Name имя.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// Surname фамилия.
-	SurName string `json:"surName"`
+	SurName *string `json:"surName"`
 
 	// MiddleName отчество.
-	MiddleName string `json:"middleName"`
+	MiddleName *string `json:"middleName"`
 }
 
 // LoadUserRequest тело запроса на получение данных пользователя.
