@@ -2,22 +2,22 @@ package ckassa
 
 type MerchantRegRequest struct {
 	// Phone номер телефона в формате 7##########.
-	Phone string `json:"phone"`
+	Phone string `json:"phone" validate:"required"`
 
 	// Email электронная почта.
 	Email *string `json:"email"`
 
 	// Name имя мерчатнта.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"required"`
 
 	// SurName фамилия.
-	SurName string `json:"surName"`
+	SurName string `json:"surName" validate:"required"`
 
 	// MiddleName отчество.
 	MiddleName string `json:"middleName"`
 
 	// CallName позывной.
-	CallName string `json:"callName"`
+	CallName string `json:"callName" validate:"required"`
 
 	// Region регион, либо город мерчанта.
 	Region *string `json:"region"`
@@ -179,7 +179,7 @@ type ConfirmPaymentRequest struct {
 // UserRegRequest тело запроса на регистрацию пользователя.
 type UserRegRequest struct {
 	// Login номер телефона в формате 7**********.
-	Login string `json:"login"`
+	Login string `json:"login" validate:"required"`
 
 	// Email почта.
 	Email *string `json:"email"`
