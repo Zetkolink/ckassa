@@ -5,7 +5,7 @@ type MerchantRegRequest struct {
 	Phone string `json:"phone"`
 
 	// Email электронная почта.
-	Email string `json:"email"`
+	Email *string `json:"email"`
 
 	// Name имя мерчатнта.
 	Name string `json:"name"`
@@ -20,10 +20,10 @@ type MerchantRegRequest struct {
 	CallName string `json:"callName"`
 
 	// Region регион, либо город мерчанта.
-	Region string `json:"region"`
+	Region *string `json:"region"`
 
 	// docList список документов (используется для идентификации).
-	DocList Docs
+	DocList *Docs
 }
 
 // Doc информация о документе мерчанта.
