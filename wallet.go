@@ -7,7 +7,7 @@ import (
 // Card карта.
 type Wallet struct {
 	// Balance баланс мерчанта в копейках.
-	Balance string `json:"balance"`
+	Balance int `json:"balance"`
 
 	// WalletCode номер кошелька мерчанта в системе autopays.
 	WalletCode string `json:"walletCode"`
