@@ -50,4 +50,4 @@ const CardRegPath = "/card/registration"
 const GetCardListPath = "/get/cards"
 
 // CardDeactivationPath путь для деактивации зарегистрированной карты.
-const CardDeactivationPath = " /card/deactivation"
+const CardDeactivationPath = "/card/deactivation"
